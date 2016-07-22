@@ -47,7 +47,14 @@ public class StringService extends BaseService {
     }
     
     public String dd(Map<String, Object> map) {
-        System.out.println("=================这个也设置加入切吧====================\n");
+
+        try{
+            System.out.println("=================这个也设置加入切吧====================\n");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
         return map + "：瞄改瞄啊！";
     }
 }

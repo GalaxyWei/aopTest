@@ -1,12 +1,3 @@
-/**  
- * Project Name:aopTest  
- * File Name:SpringProperties.java  
- * Package Name:holiday.aopTest.util  
- * Date:2015年6月30日下午5:44:59  
- * Copyright (c) 2015, sxw1989@126.com All Rights Reserved.  
- *  
-*/  
-  
 package holiday.aopTest.util;  
 
 import org.springframework.context.ApplicationContext;

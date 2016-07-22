@@ -22,6 +22,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 
@@ -42,18 +43,23 @@ public class SpringAop {
 	@Pointcut(JoinPointConst.PARAMTER_POINT)
 	public void anyMetho(){}
 	
-	@Before(value = "execution(* holiday.aopTest.service.StringService.*(..))")
-	public Object checkBefore(JoinPoint joinPoint )
+	@Before(value = "execution(* holiday.aopTest.service.StringService.dd(..)) || execution(* holiday.aopTest.service.StringService.delete(..))")
+	public Object checkBefore(JoinPoint joinPoint ) throws Exception
 	{
 		System.out.println("===========进入before advice============ \n");
 
         System.out.println("准备在" + joinPoint.getTarget().getClass() + "对象上用");
+        System.out.println("method:" + ((MethodSignature)joinPoint.getSignature()).getName());
+        Class<?>[] params = ((MethodSignature)joinPoint.getSignature()).getMethod().getParameterTypes();
+        for (Class<?> param : params) {
+            System.out.println("====" + param.getName());
+        }
         System.out.println(joinPoint.getSignature().getName() + "方法进行对 '");
         System.out.println(joinPoint.getArgs()[0] + "'进行删除！\n\n");
         Map<String, Object> map = (Map<String, Object>)joinPoint.getArgs()[0];
         System.out.println(map);
         map.put("test", "*" + String.valueOf(map.get("test")).substring(1, String.valueOf(map.get("test")).length()));
-        return map;
+		throw new Exception("AOP测试");
 	}
 	
 //	@AfterReturning(value = "execution(* holiday.aopTest.service.StringService.*(..))",returning = "result")

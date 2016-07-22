@@ -31,7 +31,8 @@ public class AopBeforeTest {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("test", "沈徐伟");
 		map.put("ddd", "dfafafa");
-		System.out.println(stringService.dd(map));
+		stringService.dd(map);
+//        stringService.delete("","");
 	}
 }
   
